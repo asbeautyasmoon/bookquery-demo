@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <script type="text/javascript" src="/public/js/jquery.js"></script>
+    <script type="text/javascript" src="/public/js/template-web.js"></script>
+    <script type="text/javascript" src="/public/js/index.js"></script>
+    <script type="text/template" id="indexTpl">
+        {{each allbook}}
+        <tr>
+            <td>{{$value.id}}</td>
+            <td>{{$value.name}}</td>
+            <td>{{$value.author}}</td>
+            <td>{{$value.category}}</td>
+            <td>{{$value.describe}}</td>
+            <td><a class='xg' data-id='{{$value.id}}' href="javascript:;">修改</a>|<a class='sc' href="javascript:;">删除</a></td>
+        </tr>
+        {{/each}}
+    </script>
+    <script type="text/template" id="weatherTpl">
+        <ul>
+            <li>城市：{{city}}</li>
+            <li>风向：{{WD}}</li>
+            <li>级别：{{WS}}</li>
+            <li>温度：{{temp}}</li>
+            <li>时间：{{time}}</li>
+        </ul>
+    </script>
+</head>
+<body>
+    <div class="title">图书管理系统<a id="addBook" href="javascript:;">添加图书</a>
+    <!-- <select>
+        <option value="101010100">北京</option>
+        <option value="101020100">上海</option>
+        <option value="101280101">广州</option>
+        <option value="101280601">深圳</option>
+    </select> -->
+   <!--  <input type="button" value="查询" id="weather"> -->
+    </div>
+    <div class="content">
+        <table cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>作者</th>
+                    <th>分类</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="dataList">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <form class="form" id="addForm">
+       <!--  <input type="hidden" name="id"> -->
+        <h3>添加图书</h3>
+        <div><span>名称：</span><input type="text" name="name"></div>
+        <div><span>作者：</span><input type="text" name="author"></div>
+        <div><span>分类：</span><input type="text" name="category"></div>
+        <div><span>描述：</span><input type="text" name="describe"></div>
+        <input type="button" value="提交">
+         <span id='close'>x</span>
+    </form>
+    <div id="zhezao"></div>
+</body>
+</html>
