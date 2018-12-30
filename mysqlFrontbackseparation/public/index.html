@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>图书管理系统</title>
@@ -21,23 +22,38 @@
     </script>
     <script type="text/template" id="weatherTpl">
         <ul>
-            <li>城市：{{city}}</li>
-            <li>风向：{{WD}}</li>
-            <li>级别：{{WS}}</li>
-            <li>温度：{{temp}}</li>
-            <li>时间：{{time}}</li>
+            <li>城市：<%=weatherinfo.city%></li>
+            <li>风向：{{weatherinfo.WD}}</li>
+            <li>级别：{{weatherinfo.WS}}</li>
+            <li>温度：{{weatherinfo.temp}}</li>
+            <li>时间：{{weatherinfo.time}}</li>
         </ul>
     </script>
+    <script type="text/template" id="cityss">
+        {{each citys}}
+             <option value="{{$value.city}}" id="{{$value.code}}"></option>
+        {{/each}}
+    </script>
+
 </head>
+
 <body>
     <div class="title">图书管理系统<a id="addBook" href="javascript:;">添加图书</a>
-    <!-- <select>
+        <!-- <select>
         <option value="101010100">北京</option>
         <option value="101020100">上海</option>
         <option value="101280101">广州</option>
         <option value="101280601">深圳</option>
     </select> -->
-   <!--  <input type="button" value="查询" id="weather"> -->
+        <div id='weathersys'>
+            <span>天气查询 </span>
+            <input type="text" name="" list='adress' id='city'>
+            <input type="button" value="查询" id="weather">
+            <datalist id="adress">
+              <!--  <option value="北京"></option> -->
+            </datalist>
+            <div id="weathernow"></div>
+        </div>
     </div>
     <div class="content">
         <table cellpadding="0" cellspacing="0">
@@ -52,21 +68,28 @@
                 </tr>
             </thead>
             <tbody id="dataList">
-                
             </tbody>
         </table>
     </div>
-
     <form class="form" id="addForm">
-       <!--  <input type="hidden" name="id"> -->
+        <!--  <input type="hidden" name="id"> -->
         <h3>添加图书</h3>
-        <div><span>名称：</span><input type="text" name="name"></div>
-        <div><span>作者：</span><input type="text" name="author"></div>
-        <div><span>分类：</span><input type="text" name="category"></div>
-        <div><span>描述：</span><input type="text" name="describe"></div>
+        <div><span>名称：</span>
+            <input type="text" name="name">
+        </div>
+        <div><span>作者：</span>
+            <input type="text" name="author">
+        </div>
+        <div><span>分类：</span>
+            <input type="text" name="category">
+        </div>
+        <div><span>描述：</span>
+            <input type="text" name="describe">
+        </div>
         <input type="button" value="提交">
-         <span id='close'>x</span>
+        <span id='close'>x</span>
     </form>
     <div id="zhezao"></div>
 </body>
+
 </html>

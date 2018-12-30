@@ -94,7 +94,29 @@ $(function() {
     });
 
 
+    //光标在输入框时发送天气城市的请求
+    $("#city").on('focus', function() {
+        //console.log('hh');
+        $.get('/getcity', {}, function(e) {
+            //console.log(e);
+            $('#adress').html(template('cityss', { citys: e })); //规定e 为数组
 
+        })
+    });
+
+
+    //查询城市的天气
+    $('#weather').on('click', function() {
+        for (var i = 0; i < $('#adress').find('option').length; i++) {
+            if ($('#adress').find('option').eq(i).val() == $('#city').val()) {
+                $.get('/weather', { code: $('#adress').find('option').eq(i).attr('id') }, function(e) {
+                    // console.log(e);
+                    $('#weathernow').html(template('weatherTpl', e));
+                });
+            }
+        }
+
+    })
 
 
 

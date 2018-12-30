@@ -1,4 +1,6 @@
 let db = require('./db.js');
+let fs=require('fs');
+const http = require('http');
 
 module.exports.render = function(req, res) {
     var options = {
@@ -50,3 +52,56 @@ module.exports.del = function(req, res) {
     });
 
 };
+
+module.exports.getcity = function(req, res) {
+     fs.readFile(__dirname+"/public/cityoldcode.txt",  function(e,d){
+        if (e) {
+            return console.log(e);
+        }
+        let arradres=d.toString().split('\r\n');
+        let arrobj=[];
+        
+        for (var i = 0; i < arradres.length; i++) {
+            let smarr=arradres[i].split('\t');
+            let smaobj={city:smarr[0],code:smarr[1]};
+            arrobj.push(smaobj);
+
+        }
+       // console.log(arrobj);
+        res.send(arrobj);
+    });
+
+};
+
+
+module.exports.weather = function(req, res) {
+    //console.log(req.query);
+    let options = {
+        protocol : 'http:',
+        hostname : 'www.weather.com.cn',
+        port : 80,
+        path : '/data/sk/'+req.query.code+'.html',
+        method : 'get'
+    }
+     let requ = http.request(options,(resu)=>{
+        let info = '';
+
+        resu.on('data',(chunk)=>{
+            info += chunk;
+        });
+        resu.on('end',()=>{
+            info = JSON.parse(info);    //得到请求响应回来的数据
+            //console.log(info);
+            res.send(info);
+        });
+    });
+
+    requ.end();
+
+
+
+
+
+};
+
+      

@@ -33,6 +33,15 @@ router.get('/del',function(req,res){
 	fnc.del(req,res);
 });
 
+router.get('/getcity',function(req,res){
+	fnc.getcity(req,res);
+});
+
+
+router.get('/weather',function(req,res){
+	fnc.weather(req,res);
+});
+
 
 router.use(function(req,res){             //其他的访问处理
 	res.set('Content-Type', 'text/html');    //express设置头是用这个
